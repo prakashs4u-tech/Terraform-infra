@@ -1,0 +1,14 @@
+name: terraform infra-Pipleine
+
+on: workflow_dispatch
+runs-on: self-hosted
+
+   
+jobs:
+  Terraforminit:
+    name: Terraform init
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v5.0.0
+    
