@@ -11,7 +11,7 @@ jobs:
       uses: actions/checkout@v5.0.0
       repository: prakashs4u-tech/Terraform-infra
       with:
-        Tokens: ${{ AZURE_CREDENTIALS_PRAKASH }
+        Tokens: ${{ AZURE_CREDENTIALS_PRAKASH }}
     - name: HashiCorp - Setup Terraform
       uses: hashicorp/setup-terraform@v2.0.3
       with:
