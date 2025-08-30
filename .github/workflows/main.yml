@@ -12,7 +12,7 @@ jobs:
       with:
       repository: prakashs4u-tech/Terraform-infra
       with:
-        creds: ${{ AZURE_CREDENTIALS_PRAKASH }
+        Tokens: ${{ AZURE_CREDENTIALS_PRAKASH }
     - name: HashiCorp - Setup Terraform
       uses: hashicorp/setup-terraform@v2.0.3
       with:
