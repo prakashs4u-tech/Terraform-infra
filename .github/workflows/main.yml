@@ -22,7 +22,10 @@ jobs:
       
     - name: Terraform Plan
       run: terraform Plan
-  
+      
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/main'   # Sirf main branch pe apply karega
+      run: terraform apply -auto-approve 
      
           
           
