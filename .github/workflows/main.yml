@@ -9,7 +9,8 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v5.0.0
-      
+      with:
+        repository: ${{ github.repository }}/Env/Dev
     - name: HashiCorp - Setup Terraform
       uses: hashicorp/setup-terraform@v2.0.3
       with:
