@@ -9,13 +9,25 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v5.0.0
-      repository: prakashs4u-tech/Terraform-infra
+      # repository: prakashs4u-tech/Terraform-infra
+      # with:
+      #   Tokens: ${{ AZURE_CREDENTIALS_PRAKASH }}
+
+    - name: Install Terraform
+      uses: little-core-labs/install-terraform@v2.0.0
       with:
-        Tokens: ${{ AZURE_CREDENTIALS_PRAKASH }}
-    - name: HashiCorp - Setup Terraform
-      uses: hashicorp/setup-terraform@v2.0.3
-      with:
-          terraform_version: 1.6.6 
+        version: 1.13.0
+           
+      
+    - name: Azure Login
+     uses: Azure/login@v2.3.0
+     with:
+          client-id: "706844d2-5a85-4697-9666-b52705e0b7c1"
+          tenant-id: "9d1ee226-120c-4ee0-8897-48a492ebb922"
+          subscription-id: "a249569e-1b10-4606-ad72-895b15a0f240"
+ 
+          
+             
     - name: Terraform Init
       run: terraform init
 
