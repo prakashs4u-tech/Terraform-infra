@@ -31,13 +31,17 @@ jobs:
  
       - name: Terraform Init
         run: terraform init
-
+        working-directory: ./Env/Dev
+      
       - name: Terraform Validate
-        run: terraform validate       
-
+        run: terraform validate
+        working-directory: ./Env/Dev
+      
       - name: Terraform Plan
-        run: terraform plan           
-
+        run: terraform plan
+        working-directory: ./Env/Dev
+      
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
         run: terraform apply -auto-approve
+        working-directory: ./Env/Dev
