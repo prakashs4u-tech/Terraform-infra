@@ -15,9 +15,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         # If you want to checkout another repo, uncomment below
-        # with:
-        #   repository: prakashs4u-tech/Terraform-infra
-        #   token: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          repository: prakashs4u-tech/Terraform-infra
+          token: ${{ AZURE_CREDENTIALS_PRAKASH }}
 
       - name: Install Terraform
         uses: little-core-labs/install-terraform@v2.0.0
