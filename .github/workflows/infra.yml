@@ -15,7 +15,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          token: ${{ AZURE_CREDENTIALS_PRAKASH }}
+          token: ${{ secrets.AZURE_CREDENTIALS_PRAKASH }}
+
 
       - name: Install Terraform
         uses: little-core-labs/install-terraform@v2.0.0
