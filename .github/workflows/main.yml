@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+        creds: ${{ AZURE_CREDENTIALS_PRAKASH }}
         # with:
         #   repository: prakashs4u-tech/Terraform-infra
         #   token: ${{ secrets.GITHUB_TOKEN }}
