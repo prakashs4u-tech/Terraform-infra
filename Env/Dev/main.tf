@@ -15,10 +15,13 @@ module "rg" {
 
 module "acr" {
   source   = "../../Module/ACR"
-  acr_name = "acrdev2025"
+  acr_name = "acrdev121286"
   rg_name  = "rg_dev"
   location = "West Europe"
   tags     = local.common_tags
+depends_on = [
+    azurerm_resource_group.rg
+  ]
 }
 
 module "sql_server" {
