@@ -1,1 +1,1 @@
-variable =
+variable  rg_name {}
