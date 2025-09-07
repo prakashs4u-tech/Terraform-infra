@@ -15,12 +15,12 @@ jobs:
       # Checkout repository
       - name: Checkout
         uses: actions/checkout@v4
-      
-      # Azure Login using Service Principal (creds JSON)
+
+      # Azure Login using Service Principal JSON from GitHub Secret
       - name: Azure Login
         uses: azure/login@v2.3.0
-        with: ${{ secrets.AZURE_CREDENTIALS }}
-          
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       # Terraform Init
       - name: Terraform Init
@@ -34,4 +34,11 @@ jobs:
 
       # Terraform Plan
       - name: Terraform Plan
-        run: terraform p
+        run: terraform plan -out=tfplan -input=false
+        working-directory: ./Env/Dev   
+
+      # Terraform Apply (only on main branch push)
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -auto-approve -input=false tfplan
+        working-directory: ./Env/Dev
