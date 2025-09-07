@@ -19,7 +19,7 @@ jobs:
       # Azure Login using Service Principal (creds JSON)
       - name: Azure Login
         uses: azure/login@v2.3.0
-        with: ${{ secrets.ARM_CLIENT_ID }}
+        with: ${{ secrets.AZURE_CREDENTIALS }}
           
 
       # Terraform Init
