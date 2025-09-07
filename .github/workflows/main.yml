@@ -1,47 +1,51 @@
 name: Project-infra-pipeline  
 
-
 on: workflow_dispatch
 
 permissions:
   id-token: write      
   contents: read 
+
 jobs:
   Terraforminit:
     name: Terraform init-Plan(Infra setup)       
     runs-on: self-hosted
 
     steps:
+      # Checkout repository
       - name: Checkout
         uses: actions/checkout@v4
            
+      # Azure Login
       - name: Azure Login
-        uses: Azure/login@v2.3.0         
+        uses: azure/login@v2.3.0         
         with:
           client-id: "706844d2-5a85-4697-9666-b52705e0b7c1"
           tenant-id: "9d1ee226-120c-4ee0-8897-48a492ebb922"
           subscription-id: "a249569e-1b10-4606-ad72-895b15a0f240"
 
+      # Setup Terraform
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
-              terraform_version: 1.9.8 
+          terraform_version: 1.9.8 
 
-     
+      # Terraform Init
       - name: Terraform Init
         run: terraform init
         working-directory: ./Env/Dev   
-      
-     
-      
+
+      # Terraform Validate
       - name: Terraform Validate
         run: terraform validate
         working-directory: ./Env/Dev
-      
+
+      # Terraform Plan
       - name: Terraform Plan
-        run: terraform plan
+        run: terraform plan -out=tfplan
         working-directory: ./Env/Dev
-      
+
+      # Terraform Apply
       - name: Terraform Apply
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve tfplan
         working-directory: ./Env/Dev
