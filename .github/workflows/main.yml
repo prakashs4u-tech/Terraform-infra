@@ -4,19 +4,14 @@ permissions:
   contents: read 
 on:
   workflow_dispatch:
-
 jobs:
   Terraforminit:
     name: Terraform init          
     runs-on: self-hosted
-   
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
-
-      
            
       - name: Azure Login
         uses: azure/login@v2          
@@ -38,6 +33,5 @@ jobs:
         working-directory: ./Env/Dev
       
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main'
         run: terraform apply -auto-approve
         working-directory: ./Env/Dev
