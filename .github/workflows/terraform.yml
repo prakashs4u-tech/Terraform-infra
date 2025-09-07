@@ -19,9 +19,10 @@ jobs:
     - name: Azure Login
       uses: azure/login@v2.3.0         
       with:
-          client-id: "706844d2-5a85-4697-9666-b52705e0b7c1"
-          tenant-id: "9d1ee226-120c-4ee0-8897-48a492ebb922"
-          subscription-id: "a249569e-1b10-4606-ad72-895b15a0f240"      
+          client-id: ${{ secrets.ARM_CLIENT_ID }}
+          tenant-id: ${{ secrets.ARM_TENANT_ID }}
+          subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          client-secret: ${{ secrets.ARM_CLIENT_SECRET }}  
 
       
 
