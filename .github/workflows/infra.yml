@@ -2,9 +2,11 @@ name: Dev-terraform-infra-workflow
 
 on:
   workflow_dispatch:
+
 permissions:
   id-token: write      
   contents: read 
+
 jobs:
   terraform-init-plan:       
     runs-on: self-hosted
@@ -33,6 +35,5 @@ jobs:
         working-directory: ./Env/Dev
       
       - name: Terraform Apply
-          
         run: terraform apply -auto-approve
         working-directory: ./Env/Dev
