@@ -1,28 +1,18 @@
-name: terraform-infra-pipeline-1 
+name: Dev-terraform-infra-workflow 
 
 on:
   workflow_dispatch:
-
+permissions:
+  id-token: write      
+  contents: read 
 jobs:
-  Terraforminit:
-    name: Terraform init          
+  terraform-init-plan:       
     runs-on: self-hosted
-    permissions:
-      id-token: write      
-      contents: read 
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.AZURE_CREDENTIALS_PRAKASH }}
-
-
-      - name: Install Terraform
-        uses: little-core-labs/install-terraform@v2.0.0
-        with:
-          version: 1.13.0
-           
+       
       - name: Azure Login
         uses: azure/login@v2          
         with:
@@ -43,6 +33,6 @@ jobs:
         working-directory: ./Env/Dev
       
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main'
+          
         run: terraform apply -auto-approve
         working-directory: ./Env/Dev
