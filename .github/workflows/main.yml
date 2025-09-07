@@ -30,20 +30,22 @@ jobs:
         with:
           terraform_version: 1.9.8 
 
-      # Terraform Init
       - name: Terraform Init
         run: terraform init
         working-directory: ./Env/Dev   
 
-      # Terraform Validate
       - name: Terraform Validate
         run: terraform validate
         working-directory: ./Env/Dev
 
-      # Terraform Plan
       - name: Terraform Plan
         run: terraform plan -out=tfplan
         working-directory: ./Env/Dev
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve tfplan
+        working-directory: ./Env/Dev
+
 
       # Terraform Apply
       - name: Terraform Apply
