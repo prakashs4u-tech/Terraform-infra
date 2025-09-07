@@ -1,5 +1,7 @@
 name: terraform-infra-pipeline  
-
+permissions:
+  id-token: write      
+  contents: read 
 on:
   workflow_dispatch:
 
@@ -7,9 +9,7 @@ jobs:
   Terraforminit:
     name: Terraform init          
     runs-on: self-hosted
-    permissions:
-      id-token: write      
-      contents: read 
+   
 
     steps:
       - name: Checkout
@@ -19,15 +19,12 @@ jobs:
           repository: prakashs4u-tech/Terraform-infra
           token: ${{ AZURE_CREDENTIALS_PRAKASH }}
 
-      - name: Install Terraform
-        uses: little-core-labs/install-terraform@v2.0.0
-        with:
-          version: 1.13.0
+      
            
       - name: Azure Login
         uses: azure/login@v2          
         with:
-          client-id: "706844d2-5a85-4697-9666-b52705e0b7c1"
+          client-id: "4cb888fc-803e-435b-b46d-69f797e5e0aa"
           tenant-id: "9d1ee226-120c-4ee0-8897-48a492ebb922"
           subscription-id: "a249569e-1b10-4606-ad72-895b15a0f240"
  
