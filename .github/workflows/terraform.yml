@@ -10,7 +10,7 @@ jobs:
   terraform:
     name: 'Terraform'
     runs-on: self-hosted
-
+    
     steps:
     
     - name: Checkout
@@ -28,16 +28,17 @@ jobs:
   
     - name: Terraform Init
       run: terraform init
-
+      working-directory: ./Env/Dev   
    
     - name: Terraform Format
       run: terraform fmt -check
-
+      working-directory: ./Env/Dev   
   
     - name: Terraform Plan
       run: terraform plan -input=false
-
+      working-directory: ./Env/Dev   
       
     - name: Terraform Apply
       if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
       run: terraform apply -auto-approve -input=false
+      working-directory: ./Env/Dev   
