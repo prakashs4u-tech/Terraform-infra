@@ -6,7 +6,7 @@ permissions:
 on: workflow_dispatch
 jobs:
   Terraforminit:
-    name: Terraform init-Plan        
+    name: Terraform init-Plan(Infra setup)       
     runs-on: self-hosted
 
     steps:
