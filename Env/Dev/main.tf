@@ -51,12 +51,7 @@ module "storage_account" {
   tags            = local.common_tags
 
 }
-module "k8s" {
 
-  source     = "../../Module/k8s cluster"
-  aks_name   = "aks_dev"
-  rg_name    = "rg_dev"
-  location   = "West Europe"
   dns_prefix = "aksdev"
 
   tags = local.common_tags
