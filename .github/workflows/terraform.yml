@@ -12,44 +12,43 @@ jobs:
     runs-on: self-hosted
     
     steps:
-    
-    - name: Checkout
-      uses: actions/checkout@v4
+      # Checkout repository
+      - name: Checkout
+        uses: actions/checkout@v4
       
-    - name: Azure Login
-      uses: azure/login@v2.3.0
-      with:
-       creds: |
-        {
-          "clientId": "${{ secrets.ARM_CLIENT_ID }}",
-          "clientSecret": "${{ secrets.ARM_CLIENT_SECRET }}",
-          "subscriptionId": "${{ secrets.ARM_SUBSCRIPTION_ID }}",
-          "tenantId": "${{ secrets.ARM_TENANT_ID }}",
-          "activeDirectoryEndpointUrl": "https://login.microsoftonline.com",
-          "resourceManagerEndpointUrl": "https://management.azure.com/",
-          "activeDirectoryGraphResourceId": "https://graph.windows.net/",
-          "sqlManagementEndpointUrl": "https://management.core.windows.net:8443/",
-          "galleryEndpointUrl": "https://gallery.azure.com/",
-          "managementEndpointUrl": "https://management.core.windows.net/"
-        }
+      # Azure Login using Service Principal (creds JSON)
+      - name: Azure Login
+        uses: azure/login@v2.3.0
+        with:
+          creds: |
+            {
+              "clientId": "${{ secrets.ARM_CLIENT_ID }}",
+              "clientSecret": "${{ secrets.ARM_CLIENT_SECRET }}",
+              "subscriptionId": "${{ secrets.ARM_SUBSCRIPTION_ID }}",
+              "tenantId": "${{ secrets.ARM_TENANT_ID }}",
+              "activeDirectoryEndpointUrl": "https://login.microsoftonline.com",
+              "resourceManagerEndpointUrl": "https://management.azure.com/",
+              "activeDirectoryGraphResourceId": "https://graph.windows.net/",
+              "sqlManagementEndpointUrl": "https://management.core.windows.net:8443/",
+              "galleryEndpointUrl": "https://gallery.azure.com/",
+              "managementEndpointUrl": "https://management.core.windows.net/"
+            }
+          enable-AzPSSession: false
+          environment: azurecloud
+          allow-no-subscriptions: false
+          audience: api://AzureADTokenExchange
+          auth-type: SERVICE_PRINCIPAL
 
+      # Terraform Init
+      - name: Terraform Init
+        run: terraform init
+        working-directory: ./Env/Dev   
 
-      
+      # Terraform Format Check
+      - name: Terraform Format
+        run: terraform fmt -check
+        working-directory: ./Env/Dev   
 
-  
-    - name: Terraform Init
-      run: terraform init
-      working-directory: ./Env/Dev   
-   
-    - name: Terraform Format
-      run: terraform fmt -check
-      working-directory: ./Env/Dev   
-  
-    - name: Terraform Plan
-      run: terraform plan -input=false
-      working-directory: ./Env/Dev   
-      
-    - name: Terraform Apply
-      if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
-      run: terraform apply -auto-approve -input=false
-      working-directory: ./Env/Dev   
+      # Terraform Plan
+      - name: Terraform Plan
+        run: terraform p
