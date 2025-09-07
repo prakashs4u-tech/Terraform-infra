@@ -1,6 +1,7 @@
 name: 'Terraform'
 
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
 
 permissions:
   id-token: write      
@@ -16,7 +17,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Azure Login using Service Principal JSON from GitHub Secret
+      # Azure Login using Service Principal
       - name: Azure Login
         uses: azure/login@v2.3.0
         with:
@@ -24,20 +25,12 @@ jobs:
           tenant-id: ${{ secrets.ARM_TENANT_ID }}
           subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
           client-secret: ${{ secrets.ARM_CLIENT_SECRET }}
-          enable-AzPSSession: false
-          environment: azurecloud
-          allow-no-subscriptions: false
-          audience: api://AzureADTokenExchange
-          auth-type: SERVICE_PRINCIPAL
-
-            
-  
 
       # Terraform Init
       - name: Terraform Init
         run: terraform init
         working-directory: ./Env/Dev   
- 
+
       # Terraform Format Check
       - name: Terraform Format
         run: terraform fmt -check
