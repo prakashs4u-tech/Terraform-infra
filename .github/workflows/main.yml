@@ -24,11 +24,11 @@ jobs:
           tenant-id: "9d1ee226-120c-4ee0-8897-48a492ebb922"
           subscription-id: "a249569e-1b10-4606-ad72-895b15a0f240"
 
-      # Setup Terraform
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: 1.9.8 
+      # # Setup Terraform
+      # - name: Setup Terraform
+      #   uses: hashicorp/setup-terraform@v2
+      #   with:
+      #     terraform_version: 1.9.8 
 
       - name: Terraform Init
         run: terraform init
