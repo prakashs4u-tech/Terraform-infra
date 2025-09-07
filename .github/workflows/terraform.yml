@@ -25,6 +25,11 @@ jobs:
           tenant-id: ${{ secrets.TENANT_ID }}
           subscription-id: ${{ secrets.SUBSCRIPTION_ID }}
           
+      # Terraform install
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.7   # stable version    
 
       # Terraform Init
       - name: Terraform Init
