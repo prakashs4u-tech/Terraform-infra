@@ -21,11 +21,11 @@ jobs:
         uses: azure/login@v2.3.0
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-          enable-AzPSSession: false
-          environment: azurecloud
-          allow-no-subscriptions: false
-          audience: api://AzureADTokenExchange
-          auth-type: SERVICE_PRINCIPAL
+          # enable-AzPSSession: false
+          # environment: azurecloud
+          # allow-no-subscriptions: false
+          # audience: api://AzureADTokenExchange
+          # auth-type: SERVICE_PRINCIPAL
 
 
       # Terraform Init
