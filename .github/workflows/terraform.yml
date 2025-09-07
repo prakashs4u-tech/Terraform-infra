@@ -20,13 +20,17 @@ jobs:
       - name: Azure Login
         uses: azure/login@v2.3.0
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+            
+            ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+            ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+            ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+            ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}   
 
       # Terraform Init
       - name: Terraform Init
         run: terraform init
         working-directory: ./Env/Dev   
-
+ 
       # Terraform Format Check
       - name: Terraform Format
         run: terraform fmt -check
