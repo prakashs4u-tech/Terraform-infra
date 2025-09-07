@@ -1,9 +1,9 @@
-name: terraform-infra-pipeline  
+name: Project-infra-pipeline  
+
 permissions:
   id-token: write      
   contents: read 
-on:
-  workflow_dispatch:
+on: workflow_dispatch
 jobs:
   Terraforminit:
     name: Terraform init-Plan        
