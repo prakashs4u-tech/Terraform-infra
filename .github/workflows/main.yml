@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 jobs:
   Terraforminit:
-    name: Terraform init          
+    name: Terraform init-Plan        
     runs-on: self-hosted
 
     steps:
