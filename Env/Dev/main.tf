@@ -52,8 +52,4 @@ module "storage_account" {
 
 }
 
-  dns_prefix = "aksdev"
 
-  tags = local.common_tags
-
-}
