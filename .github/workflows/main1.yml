@@ -49,42 +49,16 @@ jobs:
           ARM_CLIENT_SECRET: ${{ fromJSON(secrets.AZURE_CREDENTIAL).clientSecret }}
           ARM_TENANT_ID: ${{ fromJSON(secrets.AZURE_CREDENTIAL).tenantId }}
           ARM_SUBSCRIPTION_ID: ${{ fromJSON(secrets.AZURE_CREDENTIAL).subscriptionId }}
-      - name: Terraform Plan
-          id: plan
-          run: terraform plan -no-color -input=false
-          continue-on-error: true
-          working-directory: ./Env/Dev
-          env:
-            ARM_CLIENT_ID: ${{ fromJSON(secrets.AZURE_CREDENTIAL).clientId }}
-            ARM_CLIENT_SECRET: ${{ fromJSON(secrets.AZURE_CREDENTIAL).clientSecret }}
-            ARM_TENANT_ID: ${{ fromJSON(secrets.AZURE_CREDENTIAL).tenantId }}
-            ARM_SUBSCRIPTION_ID: ${{ fromJSON(secrets.AZURE_CREDENTIAL).subscriptionId }}          
-       
-          
-  # terraform-apply:    
-  #   runs-on: self-hosted
-  #   if: github.ref == 'refs/heads/main'
-  #   needs: terraform-init-plan
-  #   environment: dev
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v5.0.0
-    
-  #     - name: Azure Login
-  #       uses: Azure/login@v2.3.0
-  #       with:
-  #        client-id: "706844d2-5a85-4697-9666-b52705e0b7c1"
-  #        tenant-id: "9d1ee226-120c-4ee0-8897-48a492ebb922"
-  #        subscription-id: "a249569e-1b10-4606-ad72-895b15a0f240"   
-          
-  #     - name: Terraform Init
-  #       id: init
-  #       run: terraform init -input=false  
-  #       working-directory: ./Env/Dev 
-
-  #     - name: Terraform Apply
-  #       id: apply
-  #       run: terraform apply --auto-approve
-  #       continue-on-error: true
-  #       working-directory: ./Env/Dev               
+      
+      - name: Terraform Apply
+        id: Apply
+        run: terraform apply -no-color -input=false
+        continue-on-error: true
+        working-directory: ./Env/Dev
+        env:
+          ARM_CLIENT_ID: ${{ fromJSON(secrets.AZURE_CREDENTIAL).clientId }}
+          ARM_CLIENT_SECRET: ${{ fromJSON(secrets.AZURE_CREDENTIAL).clientSecret }}
+          ARM_TENANT_ID: ${{ fromJSON(secrets.AZURE_CREDENTIAL).tenantId }}
+          ARM_SUBSCRIPTION_ID: ${{ fromJSON(secrets.AZURE_CREDENTIAL).subscriptionId }}
+                
           
