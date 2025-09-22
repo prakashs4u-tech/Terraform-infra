@@ -1,6 +1,6 @@
 
 resource "azurerm_resource_group" "pkg" {
-  name     = "Git_hub"
+  name     = "Git-rg"
   location = "West Europe"
 }
 
