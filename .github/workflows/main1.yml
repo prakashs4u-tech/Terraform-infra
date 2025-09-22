@@ -1,0 +1,72 @@
+name: Project-infra-pipeline  
+
+on: workflow_dispatch
+
+permissions:
+  id-token: write      
+  contents: read     
+
+  
+jobs: 
+  terraform-init-plan:
+    runs-on: self-hosted
+    steps: 
+      - name: Checkout
+        usactions/checkout@v5.0.0es: 
+    
+      - name: Azure Login
+        uses: Azure/login@v2.3.0
+        with:
+          client-id: "706844d2-5a85-4697-9666-b52705e0b7c1"
+          tenant-id: "9d1ee226-120c-4ee0-8897-48a492ebb922"
+          subscription-id: "a249569e-1b10-4606-ad72-895b15a0f240"
+            
+      - name: Terraform fmt
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: true
+        working-directory: ./Env/Dev 
+        
+      - name: Terraform Init
+        id: init
+        run: terraform init -input=false  
+        working-directory: ./Env/Dev 
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+        working-directory: ./Env/Dev         
+      
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color -input=false
+        continue-on-error: true
+        working-directory: ./Env/Dev     
+        
+  terraform-apply:    
+    runs-on: self-hosted
+    if: github.ref == 'refs/heads/main'
+    needs: terraform-init-plan
+    environment: dev
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5.0.0
+    
+      - name: Azure Login
+        uses: Azure/login@v2.3.0
+        with:
+         client-id: "706844d2-5a85-4697-9666-b52705e0b7c1"
+         tenant-id: "9d1ee226-120c-4ee0-8897-48a492ebb922"
+         subscription-id: "a249569e-1b10-4606-ad72-895b15a0f240"   
+          
+      - name: Terraform Init
+        id: init
+        run: terraform init -input=false  
+        working-directory: ./Env/Dev 
+
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply --auto-approve
+        continue-on-error: true
+        working-directory: ./Env/Dev               
+          
