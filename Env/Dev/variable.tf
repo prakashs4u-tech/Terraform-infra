@@ -1,4 +1,7 @@
-variable " "{}
+variable "environment" {
+  type    = string
+  default = "dev"
+}
 
 
 
