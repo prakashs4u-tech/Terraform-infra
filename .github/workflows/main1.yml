@@ -12,7 +12,7 @@ jobs:
     runs-on: self-hosted
     steps: 
       - name: Checkout
-        usactions/checkout@v5.0.0es: 
+        uses: actions/checkout@v5.0.0
     
       - name: Azure Login
         uses: Azure/login@v2.3.0
