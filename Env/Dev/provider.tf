@@ -6,8 +6,8 @@ terraform {
     }
   }
   backend "azurerm" {
-      resource_group_name  = "rg-terraformstate"
-      storage_account_name = "devops2188"
+      resource_group_name  = "pkg"
+      storage_account_name = "moniterstorage"
       container_name       = "pk-container"
       key                  = "dev-terraform.tfstate"
   }
